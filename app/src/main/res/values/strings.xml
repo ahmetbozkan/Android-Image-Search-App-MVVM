@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Unsplash Photo App</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="refresh">Refresh</string>
+    <string name="login">Login</string>
+    <string name="like">Like</string>
+</resources>
