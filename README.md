@@ -28,6 +28,11 @@ The app uses the <a href="https://unsplash.com/" target="_blank">Unsplash API</a
 - <a href="https://developer.android.com/jetpack/androidx/releases/room?gclid=Cj0KCQiAj9iBBhCJARIsAE9qRtChvAxEUJ0dpFkx9Z0cAOCfpDjovGNB0AbJ05AA7NEdAyzKCAKT8_oaAk7QEALw_wcB&gclsrc=aw.ds" target="_blank">Room</a> - To create SQLite database to have more robust database access while harnessing the full power of SQLite.
 - <a href="https://developer.android.com/topic/libraries/architecture/paging/v3-overview" target="_blank">Paging 3</a> - To handle pagination and load large datasets -images in my case- more efficiently.
 
+### Screenshots
+--- 
+![Home Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/home_ss.PNG) ![Search Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/search_ss.PNG) ![Details Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/details_ss.PNG)
+
+
 ### Licence
 ---
 - Copyright 2021 © <a href="https://github.com/ahmetbozkan" target="_blank">Ahmet Bozkan</a>.
