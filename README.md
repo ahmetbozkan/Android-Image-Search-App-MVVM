@@ -5,4 +5,4 @@ other libraries to search random images from a web service and display them in a
 
 ## Description
 ---
-The app uses <a href="https://unsplash.com/" target="_blank">Unsplash API</a> for searching free images from the website. The app uses <a href="https://square.github.io/retrofit/" target="_blank">Retrofit Library</a> to communicate with the web service following with Android MVVM Design Pattern to achieve more maintainable app.
+The app uses <a href="https://unsplash.com/" target="_blank">Unsplash API</a> for searching free images from the website. The app uses <a href="https://square.github.io/retrofit/" target="_blank">Retrofit Library</a> to communicate with the web service following with Android MVVM Design Pattern to achieve more maintainable architecture.
