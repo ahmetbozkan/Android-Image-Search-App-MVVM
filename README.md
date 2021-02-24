@@ -30,7 +30,7 @@ The app uses the <a href="https://unsplash.com/" target="_blank">Unsplash API</a
 
 ### Screenshots
 --- 
-![Home Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/home_ss.PNG) ![Search Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/search_ss.PNG) ![Details Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/details_ss.PNG)
+![Home Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/home_ss.PNG)    ![Search Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/search_ss.PNG) ![Details Screen](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/details_ss.PNG)
 
 
 ### Licence
