@@ -25,6 +25,7 @@ The app uses the <a href="https://unsplash.com/" target="_blank">Unsplash API</a
   - <a href="https://github.com/bumptech/glide" target="_blank">Glide</a> - For image loading.
 
 ### Libraries to be Added
+---
 - <a href="https://developer.android.com/training/dependency-injection" target="_blank">Dagger</a> - For dependency injection.
 - <a href="https://developer.android.com/jetpack/androidx/releases/room?gclid=Cj0KCQiAj9iBBhCJARIsAE9qRtChvAxEUJ0dpFkx9Z0cAOCfpDjovGNB0AbJ05AA7NEdAyzKCAKT8_oaAk7QEALw_wcB&gclsrc=aw.ds" target="_blank">Room</a> - To create SQLite database to have more robust database access while harnessing the full power of SQLite.
 - <a href="https://developer.android.com/topic/libraries/architecture/paging/v3-overview" target="_blank">Paging 3</a> - To handle pagination and load large datasets -images in my case- more efficiently.
