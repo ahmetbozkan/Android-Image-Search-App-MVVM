@@ -12,7 +12,7 @@ The main purpose of the app to get started with the Android MVVM Architecture, c
 ### Unsplash API Key
 ---
 The app uses the <a href="https://unsplash.com/" target="_blank">Unsplash API</a> to load images. To use the API, you have to create an account and get a developer API key. Visit the <a href="https://unsplash.com/documentation" target="_blank">Unsplash API Documentation</a> for more information.
-</br>
+</br></br>
 ![Unsplash Website](https://github.com/ahmetbozkan/Android-Image-Search-App-MVVM/blob/master/screenshots/unsplash.PNG)
 
 ### Libraries Used
