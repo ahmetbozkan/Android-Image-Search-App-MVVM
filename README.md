@@ -5,9 +5,9 @@ other libraries to search random images from a web service and display them in a
 
 ## Description
 ---
-The app uses <a href="https://unsplash.com/" target="_blank">Unsplash API</a> for searching free images from the website. The app uses <a href="https://square.github.io/retrofit/" target="_blank">Retrofit</a> to communicate with the web service following with Android MVVM Design Pattern to achieve more maintainable architecture. Also the app uses Single-Activity pattern.
+The app uses <a href="https://unsplash.com/" target="_blank">Unsplash API</a> for searching free images from the website, <a href="https://square.github.io/retrofit/" target="_blank">Retrofit</a> is there to execute this network request and communicate with the web service following with Android MVVM Design Pattern to achieve more maintainable architecture. Also the app uses Single-Activity pattern.
 </br></br>
-The main purpose of the app to get started with the Android MVVM Architecture, communicating with web services also with some <a href="https://developer.android.com/jetpack" target="_blank">Android Jetpack</a> libraries. It can be considered as a basic app so it might have some bugs and errors.
+The main purpose of the app to get started with the Android MVVM Architecture, communicating with web services also with some <a href="https://developer.android.com/jetpack" target="_blank">Android Jetpack</a> libraries. It can be considered as a beginner app so it might consist of some bugs and errors.
 
 ### Unsplash API Key
 ---
@@ -18,7 +18,7 @@ The app uses the <a href="https://unsplash.com/" target="_blank">Unsplash API</a
 ---
 - <a href="https://developer.android.com/jetpack/guide" target="_blank">Architecture</a>
   - <a href="https://developer.android.com/guide/navigation?gclid=Cj0KCQiAj9iBBhCJARIsAE9qRtB8q19xWrOMU0xmUn61XdeIv8N7920hIVv1NtWswr5ZegovD3HwUYsaAm2IEALw_wcB&gclsrc=aw.ds" target="_blank">Jetpack Navigation</a> - To handle in-app navigation easily.
-  - <a href="https://developer.android.com/topic/libraries/architecture/livedata" target="_blank">LiveData</a> - To build a lifecycle-aware dataset to notify the UI immediately when related data changes.
+  - <a href="https://developer.android.com/topic/libraries/architecture/livedata" target="_blank">LiveData</a> - To build a lifecycle-aware dataset and notify the UI immediately when related data changes.
   - <a href="https://developer.android.com/jetpack/guide" target="_blank">Model-View-ViewModel</a> - To have much more maintainable and clean architecture, much less boilerplate code and execute asynchronous tasks easily.
 - Third party libraries
   - <a href="https://github.com/bumptech/glide" target="_blank">Glide</a> - For image loading.
