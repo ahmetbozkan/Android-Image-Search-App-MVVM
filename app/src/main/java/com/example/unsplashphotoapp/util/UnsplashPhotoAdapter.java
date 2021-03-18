@@ -1,4 +1,4 @@
-package com.example.unsplashphotoapp.ui.util;
+package com.example.unsplashphotoapp.util;
 
 import android.view.LayoutInflater;
 import android.view.View;

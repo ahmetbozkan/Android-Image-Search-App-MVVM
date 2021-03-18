@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -27,16 +28,22 @@ public interface UnsplashApi {
             @Query("per_page") Integer per_page
     );
 
-    @GET("me")
-    Call<UnsplashUser> getCurrentUser(
-            @Header("Authorization") String authorization_header
-    );
-
     //Later, save the liked photos into sqlite database with room.
     @POST("photos/{id}/like")
     Call<UnsplashResponse> likePhoto(
             @Path("id") String id,
             @Header("Authorization") String authHeader
+    );
+
+    @GET("me")
+    Call<UnsplashUser> getCurrentUser(
+            @Header("Authorization") String authHeader
+    );
+
+    @PUT("me")
+    Call<UnsplashUser> updateProfile(
+            @Header("Authorization") String authHeader,
+            @Query("username") String username
     );
 
 }

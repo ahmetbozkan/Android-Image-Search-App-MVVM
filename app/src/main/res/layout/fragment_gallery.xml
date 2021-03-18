@@ -4,40 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.toplevel.SearchFragment">
+    android:orientation="vertical"
+    tools:context=".ui.gallery.GalleryFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_search"
+        android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="4dp"
-        tools:title="Unsplash Search" />
+        tools:title="Unsplash Photos" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_search"
+        android:id="@+id/recycler_view_photos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_search"
+        android:layout_below="@id/toolbar_home"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/single_unsplash_photo" />
-
-    <TextView
-        android:id="@+id/text_view_search_placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="8dp"
-        android:text="Tap search button to search some photos."
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
-        tools:text="Tap search button to search some photos." />
 
     <ProgressBar
         android:id="@+id/progress_loading_photos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        android:layout_centerInParent="true" />
+
 
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.example.unsplashphotoapp.data;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,74 +10,39 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.unsplashphotoapp.api.unsplash.RetrofitClient;
+import com.example.unsplashphotoapp.api.oauth.AccessToken;
 import com.example.unsplashphotoapp.api.unsplash.SearchResponse;
 import com.example.unsplashphotoapp.api.unsplash.UnsplashApi;
 import com.example.unsplashphotoapp.api.unsplash.UnsplashResponse;
 import com.example.unsplashphotoapp.data.submodels.UnsplashUser;
+import com.google.gson.Gson;
 
-import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
+@Singleton
 public class UnsplashRepository {
     private static final String TAG = "UnsplashRepository";
 
-    private static UnsplashRepository mInstance;
     private final UnsplashApi unsplashApi;
-
-    private final MutableLiveData<List<UnsplashResponse>> photoList = new MutableLiveData<>();
 
     private final MutableLiveData<SearchResponse> searchList = new MutableLiveData<>();
 
-    private final MutableLiveData<UnsplashUser> currentUser = new MutableLiveData<>();
-
     private final Application application;
 
-    private UnsplashRepository(Application application) {
-        Retrofit retrofit = RetrofitClient.newInstance();
-        unsplashApi = retrofit.create(UnsplashApi.class);
-
+    @Inject
+    public UnsplashRepository(Application application, UnsplashApi unsplashApi) {
         this.application = application;
-
-        loadPhotos();
+        this.unsplashApi = unsplashApi;
     }
 
-    public static synchronized UnsplashRepository getInstance(Application application) {
-        if (mInstance == null) {
-            mInstance = new UnsplashRepository(application);
-        }
-
-        return mInstance;
-    }
-
-    public LiveData<List<UnsplashResponse>> getPhotos() {
-        return photoList;
-    }
-
-    private void loadPhotos() {
-        Call<List<UnsplashResponse>> unsplashCall = unsplashApi.getPhotos(25);
-        unsplashCall.enqueue(new Callback<List<UnsplashResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<UnsplashResponse>> call, @NonNull Response<List<UnsplashResponse>> response) {
-                if (response.body() == null) return;
-
-                List<UnsplashResponse> photos = response.body();
-                photoList.setValue(photos);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<UnsplashResponse>> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: Fail to fetch:" + t.getMessage());
-            }
-        });
-    }
-
-    public void refresh() {
-        loadPhotos();
+    public void refresh(String query) {
+        searchPhotos(query);
     }
 
     public LiveData<SearchResponse> searchPhotos(String query) {
@@ -88,8 +55,8 @@ public class UnsplashRepository {
                     return;
                 }
 
-                SearchResponse photoList = response.body();
-                searchList.setValue(photoList);
+                SearchResponse photos = response.body();
+                searchList.setValue(photos);
             }
 
             @Override
@@ -99,35 +66,6 @@ public class UnsplashRepository {
         });
 
         return searchList;
-    }
-
-    private void loadCurrentUser(String header) {
-        Call<UnsplashUser> currentUserCall = unsplashApi.getCurrentUser(header);
-        currentUserCall.enqueue(new Callback<UnsplashUser>() {
-            @Override
-            public void onResponse(@NonNull Call<UnsplashUser> call, @NonNull Response<UnsplashUser> response) {
-                if (!response.isSuccessful()) {
-                    return;
-                }
-
-                UnsplashUser user = response.body();
-                currentUser.setValue(user);
-                Log.d(TAG, "onResponse: Current User: " + user.getName());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<UnsplashUser> call, @NonNull Throwable t) {
-                Log.e(TAG, "onFailure: Error on loading current user: " + t.getMessage());
-            }
-        });
-    }
-
-    public LiveData<UnsplashUser> getCurrentUser(String header) {
-        if (currentUser != null) {
-            loadCurrentUser(header);
-        }
-
-        return currentUser;
     }
 
     public void likePhoto(String id, String header) {
@@ -151,4 +89,20 @@ public class UnsplashRepository {
             }
         });
     }
+
+    public AccessToken getAccessToken() {
+        SharedPreferences sharedPreferences = application.getSharedPreferences("ACCESS_TOKEN_PREFS", Context.MODE_PRIVATE);
+        String tokenJson = sharedPreferences.getString("access_token_object", "null");
+
+        if (tokenJson == null) {
+            return null;
+        } else {
+            return new Gson().fromJson(
+                    tokenJson,
+                    AccessToken.class
+            );
+        }
+    }
+
+
 }

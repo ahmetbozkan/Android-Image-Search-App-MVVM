@@ -30,11 +30,18 @@ import com.bumptech.glide.request.target.Target;
 import com.example.unsplashphotoapp.R;
 import com.example.unsplashphotoapp.api.unsplash.UnsplashResponse;
 import com.example.unsplashphotoapp.data.submodels.UnsplashUser;
-import com.example.unsplashphotoapp.ui.photo.UnsplashViewModel;
+import com.example.unsplashphotoapp.ui.gallery.GalleryViewModel;
+import com.example.unsplashphotoapp.viewmodels.ViewModelProviderFactory;
 import com.google.android.material.imageview.ShapeableImageView;
+
+import javax.inject.Inject;
 
 public class DetailsFragment extends Fragment {
     private static final String TAG = "DetailsFragment";
+
+    @Inject
+    ViewModelProviderFactory viewModelProviderFactory;
+    private GalleryViewModel galleryViewModel;
 
     private ImageView image_photo;
     private ShapeableImageView image_userImage;
@@ -52,9 +59,6 @@ public class DetailsFragment extends Fragment {
         setToolbar(view);
         setCurrentPhoto(view);
 
-        UnsplashViewModel unsplashViewModel = new ViewModelProvider(requireActivity())
-                .get(UnsplashViewModel.class);
-
         view.findViewById(R.id.layout_user_info).setOnClickListener(v -> {
             NavDirections action = DetailsFragmentDirections
                     .actionDetailsFragmentToUserProfileFragment(author);
@@ -65,13 +69,13 @@ public class DetailsFragment extends Fragment {
         });
 
         button_like.setOnClickListener(v -> {
-            if (unsplashViewModel.getAccessToken() == null) {
+            if (galleryViewModel.getAccessToken() == null) {
                 Toast.makeText(requireContext(), "You have to login first.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            String access_token = unsplashViewModel.getAccessToken().getAccess_token();
-            unsplashViewModel.likePhoto(photo.getId(), "Bearer " + access_token);
+            String access_token = galleryViewModel.getAccessToken().getAccess_token();
+            galleryViewModel.likePhoto(photo.getId(), "Bearer " + access_token);
         });
     }
 
@@ -79,8 +83,10 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
-
         init(rootView);
+
+        galleryViewModel = new ViewModelProvider(requireActivity(), viewModelProviderFactory)
+                .get(GalleryViewModel.class);
 
         return rootView;
     }
@@ -90,7 +96,6 @@ public class DetailsFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar_details);
         NavigationUI.setupWithNavController(toolbar, navController);
-
     }
 
     @SuppressLint("SetTextI18n")

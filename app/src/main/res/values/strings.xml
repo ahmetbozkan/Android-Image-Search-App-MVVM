@@ -6,4 +6,10 @@
     <string name="refresh">Refresh</string>
     <string name="login">Login</string>
     <string name="like">Like</string>
+    <string name="unable_to_upload_images">Unable to upload images.</string>
+    <string name="update">Update</string>
+    <string name="username">Username:</string>
+    <string name="name">Name:</string>
+    <string name="saved_images">Saved Images</string>
+    <string name="saves">Saves</string>
 </resources>

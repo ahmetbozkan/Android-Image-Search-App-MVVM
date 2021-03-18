@@ -7,10 +7,15 @@
         android:title="@string/refresh"
         app:showAsAction="never" />
 
+
+
     <item
-        android:id="@+id/option_login"
-        android:title="@string/login"
-        app:showAsAction="never" />
+        android:id="@+id/options_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:iconTint="@android:color/black"
+        app:showAsAction="always|collapseActionView" />
 
 
 </menu>
