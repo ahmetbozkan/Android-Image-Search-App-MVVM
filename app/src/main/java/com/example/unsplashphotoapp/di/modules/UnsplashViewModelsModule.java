@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.unsplashphotoapp.di.ViewModelKey;
 import com.example.unsplashphotoapp.ui.gallery.GalleryViewModel;
 import com.example.unsplashphotoapp.ui.profile.OAuthViewModel;
+import com.example.unsplashphotoapp.ui.saves.SavesViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -17,6 +18,11 @@ public abstract class UnsplashViewModelsModule {
     @IntoMap
     @ViewModelKey(GalleryViewModel.class)
     public abstract ViewModel bindGalleryViewModel(GalleryViewModel galleryViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SavesViewModel.class)
+    public abstract ViewModel bindSavesViewModel(SavesViewModel savesViewModel);
 
     @Binds
     @IntoMap

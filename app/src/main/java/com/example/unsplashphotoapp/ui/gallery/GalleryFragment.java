@@ -1,8 +1,5 @@
 package com.example.unsplashphotoapp.ui.gallery;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,9 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -33,22 +29,22 @@ import com.example.unsplashphotoapp.BaseApplication;
 import com.example.unsplashphotoapp.MainActivity;
 import com.example.unsplashphotoapp.R;
 import com.example.unsplashphotoapp.api.unsplash.UnsplashResponse;
-import com.example.unsplashphotoapp.util.UnsplashPhotoAdapter;
+import com.example.unsplashphotoapp.data.entities.UnsplashPhoto;
+import com.example.unsplashphotoapp.util.GalleryAdapter;
 import com.example.unsplashphotoapp.viewmodels.ViewModelProviderFactory;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import javax.inject.Inject;
 
 
-public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.OnPhotoClickListener {
+public class GalleryFragment extends Fragment implements GalleryAdapter.OnPhotoClickListener {
     private static final String TAG = "HomeFragment";
 
     @Inject
     ViewModelProviderFactory viewModelProviderFactory;
 
-    private UnsplashPhotoAdapter unsplashPhotoAdapter;
+    private GalleryAdapter galleryAdapter;
     private GalleryViewModel galleryViewModel;
 
     private RecyclerView recyclerView;
@@ -61,13 +57,12 @@ public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.On
         setupToolbar(view);
 
         galleryViewModel.searchPhotos().observe(getViewLifecycleOwner(), unsplashResponses -> {
-            List<UnsplashResponse> results =  unsplashResponses.getResults();
+            List<UnsplashResponse> results = unsplashResponses.getResults();
 
-            if(results.size() == 0) {
+            if (results.size() == 0) {
                 Toast.makeText(requireContext(), "No results found.", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                unsplashPhotoAdapter.submitList(results);
+            } else {
+                galleryAdapter.submitList(results);
             }
 
 
@@ -83,7 +78,7 @@ public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.On
         View rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         buildRecyclerView(rootView);
 
-        ((BaseApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        ((BaseApplication) requireActivity().getApplication()).getAppComponent().inject(this);
 
         galleryViewModel = new ViewModelProvider(requireActivity(), viewModelProviderFactory)
                 .get(GalleryViewModel.class);
@@ -109,12 +104,11 @@ public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.option_refresh) {
             galleryViewModel.refresh();
-            unsplashPhotoAdapter.notifyDataSetChanged();
+            galleryAdapter.notifyDataSetChanged();
             recyclerView.smoothScrollToPosition(0);
 
             return true;
-        }
-        else if (item.getItemId() == R.id.options_search) {
+        } else if (item.getItemId() == R.id.options_search) {
             SearchView searchView = (SearchView) item.getActionView();
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -158,8 +152,8 @@ public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.On
         recyclerView = view.findViewById(R.id.recycler_view_photos);
         recyclerView.setHasFixedSize(true);
 
-        unsplashPhotoAdapter = new UnsplashPhotoAdapter(this);
-        recyclerView.setAdapter(unsplashPhotoAdapter);
+        galleryAdapter = new GalleryAdapter(this);
+        recyclerView.setAdapter(galleryAdapter);
     }
 
     @Override
@@ -172,9 +166,27 @@ public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.On
         Navigation
                 .findNavController(view)
                 .navigate(action);
+
     }
 
-    public static class TimeOutAsyncTask extends AsyncTask<Void, Void, Void> {
+    @Override
+    public void onSaveClick(UnsplashResponse unsplashResponse) {
+        Log.d(TAG, "onSaveClick: Save clicked.");
+
+        UnsplashPhoto unsplashPhoto = new UnsplashPhoto(
+                unsplashResponse.getId(),
+                unsplashResponse.getCreated_at(),
+                unsplashResponse.getDescription(),
+                unsplashResponse.getLikes(),
+                true,
+                unsplashResponse.getUser(),
+                unsplashResponse.getUrls()
+        );
+
+        galleryViewModel.insertSavedPhoto(unsplashPhoto);
+    }
+
+    /*public static class TimeOutAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private final WeakReference<TextView> tv_timeOut;
         private final WeakReference<Button> button_refresh;
@@ -206,5 +218,5 @@ public class GalleryFragment extends Fragment implements UnsplashPhotoAdapter.On
 
             progress_loadingImages.get().setVisibility(View.GONE);
         }
-    }
+    }*/
 }

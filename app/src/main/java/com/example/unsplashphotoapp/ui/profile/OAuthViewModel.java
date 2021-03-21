@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.unsplashphotoapp.api.oauth.AccessToken;
-import com.example.unsplashphotoapp.data.OAuthRepository;
+import com.example.unsplashphotoapp.data.repositories.OAuthRepository;
 import com.example.unsplashphotoapp.data.submodels.UnsplashUser;
 
 import javax.inject.Inject;

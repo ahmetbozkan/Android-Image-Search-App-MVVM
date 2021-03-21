@@ -16,7 +16,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.unsplashphotoapp.R;
 import com.example.unsplashphotoapp.api.unsplash.UnsplashResponse;
 
-public class UnsplashPhotoAdapter extends ListAdapter<UnsplashResponse, UnsplashPhotoAdapter.UnsplashViewHolder> {
+public class GalleryAdapter extends ListAdapter<UnsplashResponse, GalleryAdapter.UnsplashViewHolder> {
 
     private final OnPhotoClickListener onPhotoClickListener;
 
@@ -36,7 +36,7 @@ public class UnsplashPhotoAdapter extends ListAdapter<UnsplashResponse, Unsplash
         }
     };
 
-    public UnsplashPhotoAdapter(OnPhotoClickListener onPhotoClickListener) {
+    public GalleryAdapter(OnPhotoClickListener onPhotoClickListener) {
         super(DIFF_CALLBACK);
 
         this.onPhotoClickListener = onPhotoClickListener;
@@ -62,37 +62,63 @@ public class UnsplashPhotoAdapter extends ListAdapter<UnsplashResponse, Unsplash
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.image_view);
 
+
+        Glide.with(holder.itemView.getContext())
+                .load(R.drawable.ic_saves_unsaved)
+                .centerCrop()
+                .error(R.drawable.ic_error)
+                .into(holder.image_view_save);
+
+
         holder.tv_username.setText(currentPhoto.getUser().getName());
     }
 
     public class UnsplashViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ImageView image_view;
         private final TextView tv_username;
+        private final ImageView image_view_save;
 
         public UnsplashViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image_view = itemView.findViewById(R.id.image_view_photo);
             tv_username = itemView.findViewById(R.id.text_view_username);
+            image_view_save = itemView.findViewById(R.id.image_view_save_photo);
 
             itemView.setOnClickListener(this);
+            image_view_save.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
+            if (v.getId() == itemView.getId()) {
+                int position = getAdapterPosition();
 
-            if (position != RecyclerView.NO_POSITION) {
-                UnsplashResponse unsplashPhoto = getItem(position);
+                if (position != RecyclerView.NO_POSITION) {
+                    UnsplashResponse unsplashPhoto = getItem(position);
 
-                if (unsplashPhoto != null) {
-                    onPhotoClickListener.onPhotoClick(unsplashPhoto, v);
+                    if (unsplashPhoto != null) {
+                        onPhotoClickListener.onPhotoClick(unsplashPhoto, v);
+                    }
+                }
+            } else {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    UnsplashResponse unsplashPhoto = getItem(position);
+
+                    if (unsplashPhoto != null) {
+                        onPhotoClickListener.onSaveClick(unsplashPhoto);
+                    }
                 }
             }
+
         }
     }
 
     public interface OnPhotoClickListener {
         void onPhotoClick(UnsplashResponse unsplashResponse, View view);
+
+        void onSaveClick(UnsplashResponse unsplashResponse);
     }
 }

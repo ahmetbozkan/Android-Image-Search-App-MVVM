@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.unsplashphotoapp.api.oauth.AccessToken;
 import com.example.unsplashphotoapp.api.unsplash.SearchResponse;
-import com.example.unsplashphotoapp.data.OAuthRepository;
-import com.example.unsplashphotoapp.data.UnsplashRepository;
-import com.example.unsplashphotoapp.data.submodels.UnsplashUser;
+import com.example.unsplashphotoapp.data.entities.UnsplashPhoto;
+import com.example.unsplashphotoapp.data.repositories.UnsplashRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,6 +45,11 @@ public class GalleryViewModel extends ViewModel {
 
     public void likePhoto(String id, String header) {
         mRepository.likePhoto(id, header);
+    }
+
+
+    public void insertSavedPhoto(UnsplashPhoto unsplashPhoto) {
+        mRepository.insertSavedPhoto(unsplashPhoto);
     }
 
 }

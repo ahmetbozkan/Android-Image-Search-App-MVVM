@@ -1,4 +1,4 @@
-package com.example.unsplashphotoapp.data;
+package com.example.unsplashphotoapp.data.repositories;
 
 import android.app.Application;
 import android.content.Context;
