@@ -21,13 +21,13 @@ The app uses the <a href="https://unsplash.com/" target="_blank">Unsplash API</a
   - <a href="https://developer.android.com/guide/navigation?gclid=Cj0KCQiAj9iBBhCJARIsAE9qRtB8q19xWrOMU0xmUn61XdeIv8N7920hIVv1NtWswr5ZegovD3HwUYsaAm2IEALw_wcB&gclsrc=aw.ds" target="_blank">Jetpack Navigation</a> - To handle in-app navigation easily.
   - <a href="https://developer.android.com/topic/libraries/architecture/livedata" target="_blank">LiveData</a> - To build a lifecycle-aware dataset and notify the UI immediately when related data changes.
   - <a href="https://developer.android.com/jetpack/guide" target="_blank">Model-View-ViewModel</a> - To have much more maintainable and clean architecture, much less boilerplate code and execute asynchronous tasks easily.
+  - <a href="https://developer.android.com/training/dependency-injection" target="_blank">Dagger</a> - For dependency injection.
+  - <a href="https://developer.android.com/jetpack/androidx/releases/room?gclid=Cj0KCQiAj9iBBhCJARIsAE9qRtChvAxEUJ0dpFkx9Z0cAOCfpDjovGNB0AbJ05AA7NEdAyzKCAKT8_oaAk7QEALw_wcB&gclsrc=aw.ds" target="_blank">Room</a> - For creating a SQLite database to save desired images to display them later.
 - Third party libraries
   - <a href="https://github.com/bumptech/glide" target="_blank">Glide</a> - For image loading.
 
 ### Libraries to be Added
 ---
-- <a href="https://developer.android.com/training/dependency-injection" target="_blank">Dagger</a> - For dependency injection.
-- <a href="https://developer.android.com/jetpack/androidx/releases/room?gclid=Cj0KCQiAj9iBBhCJARIsAE9qRtChvAxEUJ0dpFkx9Z0cAOCfpDjovGNB0AbJ05AA7NEdAyzKCAKT8_oaAk7QEALw_wcB&gclsrc=aw.ds" target="_blank">Room</a> - For creating a SQLite database to save desired images to display them later.
 - <a href="https://developer.android.com/topic/libraries/architecture/paging/v3-overview" target="_blank">Paging 3</a> - To handle pagination and load large datasets -images in my case- more efficiently.
 
 ### Screenshots
