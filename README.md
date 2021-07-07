@@ -1,7 +1,7 @@
 # Android Image Search App 
 ---
 A simple image search app which uses some of the <a href="https://developer.android.com/jetpack/guide" target="_blank">Android Architecture Components</a> and bunch of
-other libraries to search random images from a web service and display them in a RecyclerView.
+other libraries to search random images from a web service and display them in a RecyclerView. To see the Kotlin version of this application, click <a href="https://github.com/ahmetbozkan/Android-Image-Search-App-Kotlin" target="_blank"> here. </a>
 
 ## Description
 ---
